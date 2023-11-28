@@ -1,0 +1,56 @@
+<!-- 静的ファイルのURLを生成するstaticタグをロードする -->
+{% load static %}
+
+
+<!-- タイトルとナビゲーションボタン -->
+  <section class="py-0 text-center container">
+    <div class="row py-lg-2">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <!-- タイトルと本文 -->
+        <img class="mb-4"
+             src={% static "img/logo.png" %}
+             alt="" width="270"
+             height="270">
+        
+        <p class="lead text-muted smaller-font">
+          白沢甲部子ども会のブログです。
+          行事のご案内や様子をお知らせします。</p>
+        <p>
+          <!-- ナビゲーションボタン -->
+          
+          {% if user.is_authenticated %}
+          <!-- ログイン中のボタン -->
+          <a href="{% url 'kouka2app:photogallery' %}"
+          class="btn btn-primary my-2">Photogalleryへ</a>
+          <a href="{% url 'kouka2app:post' %}"
+              class="btn btn-primary my-2">photo投稿</a>
+          <a href="{% url 'accounts:logout' %}"
+              class="btn btn-secondary my-2">ログアウト</a>
+          
+          {% else %}
+          <!-- ログイン状態ではない場合のボタン -->
+          <a href="{% url 'kouka2app:photogallery' %}"
+          class="btn btn-primary my-2">Photogalleryへ</a>
+          <a href="{% url 'accounts:signup' %}"
+            class="btn btn-primary my-2">今すぐサインアップ</a>
+          <a href="{% url 'accounts:login' %}"
+            class="btn btn-secondary my-2">登録済みの方はログイン</a>
+          {% endif %}
+
+                  </p>
+        <style>
+          /* テキストの色を指定 */
+          .text-muted {
+            color: #241616; /* 希望の色に変更 */
+          }
+        
+          /* テキストのフォントサイズを調整 */
+          .smaller-font {
+            font-size: 1.1em; /* フォントサイズを調整 */
+          }
+        </style>
+        
+       
+      </div>
+    </div>
+  </section>

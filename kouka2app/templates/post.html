@@ -1,0 +1,81 @@
+<!-- ベーステンプレートを適用する -->
+{% extends 'base.html' %}
+
+<!-- 静的ファイルのURLを生成するstaticタグのロードは個々のページで行うことが必要 -->
+{% load static %}
+<!-- ヘッダー情報のページタイトルは
+ベーステンプレートを利用するページで設定する -->
+{% block title %}白沢甲部子ども会Blog･Photogallery{% endblock %}
+
+<!-- <body>と<nav>はベーステンプレートで設定済みなので、削除 -->
+        <!-- Navigation-->
+
+        <!-- Page Header-->
+        <!-- ページのヘッダーはベーステンプレートを利用するページで設定するので
+        テンプレートタグで囲む -->
+        {% block header %}
+        <!-- ヘッダー背景イメージのリンク先url()の引数をstaticタグに書き換え -->
+        <!-- <header class="masthead" style="background-image: url({% static 'assets/img/post-bg.jpg' %})">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="post-heading"> -->
+                            <!-- 投稿記事のタイトル
+                            <h1>タグの要素を書き換える
+                            レコードをobjectで参照し、contentフィールドの値を出力 -->
+                            <h1>{{object.title}}</h1>
+                            <!-- サブタイトル
+                            <h2>タグの要素を書き換える、レコードをobjectで参照し、
+                            contentフィールドの値を30文字以内で出力 -->
+                            <h2 class="subheading">
+                                {{object.content|truncatechars:30}}</h2>
+                            <span class="meta">
+                                <!-- 投稿日時とカテゴリ
+                                トップページにリンクする -->
+                                <a href={% url 'kouka2:index' %}>
+                                    白沢甲部子ども会Blog･Photogallery</a>
+                                <!-- 投稿日時としてposted_atフィールドを出力 -->
+                                {{object.posted_at}}に投稿/カテゴリ:
+                                <!-- categoryフィールドを出力 -->
+                                {{object.category}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- ページのヘッダーに適用するテンプレートタグの終了 -->
+        {% endblock %}
+        <!-- Post Content-->
+        <!-- <article>～</article>はベーステンプレートを
+        利用するページで設定するので、テンプレートタグで囲む -->
+        {% block contents %}
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="post-heading">
+                        <!-- ブログタイトル -->
+                        <h2 style="color: #191970; text-decoration: underline;">{{object.title}}</h2>
+                        <span class="meta">
+
+                        <!-- レコードをobjectで参照し、contentフィールドの値を出力
+                        <p>～</p>の要素とすることで全体を1つの段落にする -->
+                        <p>{{object.content}}</p>
+                        <!-- 投稿日時としてposted_atフィールドを出力 -->
+                        {{object.posted_at}}に投稿/カテゴリ:
+                        <!-- categoryフィールドを出力 -->
+                        {{object.category}}</span>
+                        
+                        <!-- トップページにリンクする -->
+                        <a href={% url 'kouka2app:index' %}>
+                                白沢甲部子ども会Blog･Photogallery</a>
+                    </div>
+                </div>
+            </div>
+        </article>
+            <!-- 水平線を追加 -->
+        <hr>
+        <!-- テンプレートタグ終了 -->
+        {% endblock %}
+        
+        <!-- Footer-->
+        <!-- <footer>以下はベーステンプレートで設定するので、削除 -->

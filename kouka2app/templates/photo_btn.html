@@ -1,0 +1,33 @@
+<!-- タイトルとナビゲーションボタン -->
+  <section class="py-0 text-center container">
+    <div class="row py-lg-2 ">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <div class="text-left">
+          <div style="text-align: left; margin-left: -280px;"> <!-- スタイルを直接適用 -->
+            <h2 class="text-secondary text-left">Photogallery</h2>
+          </div>
+
+            <!-- ナビゲーションボタン -->
+            {% if user.is_authenticated %}
+            <!-- ログイン中のボタン -->
+            <div style="text-align: left; margin-left: -280px;"> <!-- スタイルを直接適用 -->
+              <a href="{% url 'kouka2app:post' %}"
+                  class="btn btn-primary my-2 ">photo投稿</a>
+              <a href="{% url 'accounts:logout' %}"
+                  class="btn btn-secondary my-2">ログアウト</a>
+            </div>
+            
+            {% else %}
+            <!-- ログイン状態ではない場合のボタン -->
+            <div style="text-align: left;"> <!-- スタイルを直接適用 -->
+              <a href="{% url 'accounts:signup' %}"
+                class="btn btn-primary my-2">今すぐサインアップ</a>
+              <a href="{% url 'accounts:login' %}"
+                class="btn btn-secondary my-2">登録済みの方はログイン</a>
+            </div>
+            {% endif %}
+        
+        </div>
+      </div>
+    </div>
+  </section>

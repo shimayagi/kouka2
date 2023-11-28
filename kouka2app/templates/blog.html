@@ -1,0 +1,92 @@
+<!--静的ファイルのURLを生成するstaticタグをロードする-->
+{% load static %}
+
+<!-- Main Content-->
+<!-- メインコンテンツを設定する<div>～</div>をテンプレートタグで囲む -->
+{% block contents %}
+<hr>
+<h2 style="padding-left: 6cm; color: #535252;">Blog記事一覧</h2>
+<h5 style="padding-left: 6cm; color: #535252;">＜記事Category＞</h5>
+<!-- ナビゲーションメニューの｢DAILYLIFE｣のリンク先を
+名前つきURLパターンdailylife_listに設定する -->
+<div class="inline-links">
+    <a class="nav-link1  py-3 py-lg-4" href="{% url 'kouka2app:school_list' %}">SCHOOL:学校関連</a>
+    <a class="nav-link px-lg-0 py-3 py-lg-4" href="{% url 'kouka2app:festival_list' %}">/FESTIVAL:お祭り</a>
+    <a class="nav-link px-lg-0 py-3 py-lg-4" href="{% url 'kouka2app:ivent_list' %}">/IVENT:イベント</a>
+    <a class="nav-link px-lg-0 py-3 py-lg-4" href="{% url 'kouka2app:cleaning_list' %}">/CLEANING:清掃活動</a>
+    <a class="nav-link px-lg-0 py-3 py-lg-4" href="{% url 'kouka2app:safety_list' %}">/SAFETY:安心･安全</a>
+    <a class="nav-link px-lg-0 py-3 py-lg-4" href="{% url 'kouka2app:others_list' %}">/OTHERS:その他</a>
+
+
+</div>
+<style>
+     /* ブログ記事一覧のタイトルとカテゴリの間の行間を調整する */
+    .inline-links a {
+        display: inline;
+        margin-right: 10px; /* 必要に応じて間隔を調整 */
+    }
+    .nav-link1 {
+        padding-left: 7cm; /* 左余白を5センチに設定 */
+    }
+    h2, h5 {
+        style="color: #535252;"
+
+    }
+</style>
+<br>
+<div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-md-10 col-lg-8 col-xl-7">
+        
+
+            <!-- レコードが格納されたorderby_recordsから
+            レコードを1行ずつrecordに取り出す -->
+            {% for record in orderby_records %}
+            <!-- Post preview-->
+            <div class="post-preview">
+                                    
+                <!-- urlでURLパターン’blog-detail/<ink:pk>を生成し、
+                詳細ページへのリンクを設定 -->
+                <a href="{% url 'kouka2app:blog_detail' record.pk %}">
+
+                    <!-- 記事のタイトル -->
+                    <h2 class="post-title" style="color: #191970; text-decoration: underline;">
+                        {{record.title}}</h2>
+                    <!-- 投稿記事の本文 -->
+                    <h3 class="post-subtitle" style="color: #3838e1; text-decoration: underline; border-bottom: 1px solid #3838e1;">
+                        <!-- サブタイトルの文字を14PTにする -->
+                        <span style="font-size : 14pt">
+                            <!-- contentフィールドを出力、出力する文字を50以内に制限 -->
+                            {{record.content|truncatechars:50}}
+                        </span>
+                    </h3>
+                </a>
+                <!-- 最終投稿とカテゴリ -->
+                <p class="post-meta">
+                    <!-- ページの最上部にリンクする -->
+                    <a href="#">白沢甲部子ども会Blog･Photogallery</a>
+
+                    <!-- posted_atフィールドを出力 -->
+                    {{record.posted_at}}に投稿/カテゴリ:
+
+                    <!-- categoryフィールドを出力 -->
+                    {{record.category}}</p>
+                </p>
+            </div>
+
+            <!-- Divider-->
+            <hr class="my-4" />
+
+            <!-- forによる繰り返しはここまで -->
+            {% endfor %}
+
+            <!-- Pager -->
+            <!-- ページネーションが組み込まれたテンプレートの読み込み -->
+            {% include "pagination.html" %}
+        </div>
+    </div>
+</div>
+
+<!-- メインコンテンツを設定する<div>～</div>をテンプレートタグで囲む -->
+{% endblock %}
+

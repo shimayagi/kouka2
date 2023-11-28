@@ -1,0 +1,153 @@
+<!-- 静的ファイルのURLを生成するstaticタグをロードする-->
+{% load static %}
+<!doctype html>
+<!-- 言語指定をenからjaに変更-->
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author"
+          content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <!-- ヘッダー情報のタイトルを個別に設定できるようにする-->
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- staticでfavicon.icoのURLを生成する -->
+    <link rel="icon" type="image/x-icon"
+          href={% static 'assets/favicon.ico' %} />
+
+
+    <!-- Bootstrap core CSS -->
+    <!-- Bootstrap core CSSを読み込むコードをBootstrapからコピー-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+
+    <style>   
+      .navbar-dark {
+        background-image: url('{% static "img/head.jpg" %}');
+        background-size: cover;
+         /* 画像のサイズを調整 */
+        /* 他の背景設定（例えば、色や透明度）を追加できます */
+      }
+      .navbar-brand .text-secondary {
+        font-size: 1.5em; /* テキストを1.5倍のサイズに設定（例） */
+      }
+      .navbar-brand .text-secondary {
+        color: #535252 !important; /* テキストのカラーを濃い灰色に設定 */
+      }
+
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+    
+
+    </style>    
+  </head>
+  
+  <body>
+    <!-- ページのヘッダー -->
+    <header>
+      
+      <!-- ナビゲーションバーのヘッダー -->
+      <div class="navbar-dark">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-1">
+                        <!-- トップページへのリンク-->
+              <a href="{% url 'kouka2app:index' %}"
+                class="navbar-brand d-flex align-items-center">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                    width="20" height="20" fill="none"
+                    stroke="#008000"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    aria-hidden="true"
+                    class="me-2"
+                    viewBox="0 0 24 24">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+              <circle cx="12" cy="13" r="4"/></svg>
+            <!-- リンクテキスト-->
+            
+            <strong class="text-secondary">白沢甲部子ども会 Blog･Photogallery</strong>
+            </a>
+            
+              
+              <!-- ヘッダーのタイトルと本文-->
+              <!-- <h4 class="text-secondary">お気に入りを見つけよう！</h4> -->
+              <p class="text-muted">
+                 行事の様子はBlogでお知らせします。
+                <br> 子ども会の行事で撮った写真は、ぜひ
+                Photogalleryに投稿してください！
+              </p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-3 text-end">
+              <ul class="list-unstyled">
+                <!-- ナビゲーションメニュー -->
+                {%if user.is_authenticated %}
+
+                <!-- ログイン中のメニュー -->
+                <li><a href="{% url 'kouka2app:mypage' %}"
+                      class="text-secondary">マイページ</a></li>
+                <li><a href="{% url 'accounts:logout' %}"      
+                      class="text-secondary">ログアウト</a></li>
+                <li><a href="{% url 'password_reset' %}"    
+                      class="text-secondary">パスワードのリセット</a></li>
+                <li><a href="mailto:admin@example.com"
+                      class="text-secondary">Email me</a></li>
+                {% else %}
+
+                <!-- ログイン状態ではない場合のメニュー -->
+                <li><a href="{% url 'accounts:signup' %}" 
+                       class="text-secondary">サインアップ</a></li>
+                       <li><a href="{% url 'accounts:login' %}"
+                        class="text-secondary">ログイン</a></li>
+                <li><a href="mailto:admin@example.com"
+                       class="text-secondary">Email me</a></li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <hr style="margin-top: 0;">
+    </header>
+    
+    <!-- メインコンテンツ -->
+    <main>
+      <!-- <main>タグの要素をすべて削除して以下に書き換え-->
+      <!-- メインコンテンツの本体部分は各ページのテンプレートで埋め込む -->
+      {% block contents %}{% endblock %}
+    </main>
+    
+    <!-- フッター -->
+    <footer class="text-muted py-3">
+      <div class="container">
+        <p class="float-end mb-1">
+          <a href="#">Back to top</a>
+        </p>
+        <!-- フッターのテキストを任意のものに書き換え-->
+        <p class="mb-1">
+          白沢甲部こども会 &copy; Bootstrap</p>
+        <!-- 2つ目の<p class="mb-0">は末尾の</p>まで削除-->
+      </div>
+    </footer>
+    
+    <!-- BootstrapからJavaScriptを読み込むコードをコピーして貼り付け -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script> 
+    
+    </script>
+  </body>
+</html>
