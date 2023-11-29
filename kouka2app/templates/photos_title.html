@@ -21,11 +21,13 @@
           {% if user.is_authenticated %}
           <!-- ログイン中のボタン -->
           <a href="{% url 'kouka2app:photogallery' %}"
-          class="btn btn-primary my-2">Photogalleryへ</a>
+            class="btn btn-primary my-2">Photogalleryへ</a>
           <a href="{% url 'kouka2app:post' %}"
-              class="btn btn-primary my-2">photo投稿</a>
+            class="btn btn-primary my-2">photo投稿</a>
+          <a href="{% url 'kouka2app:calender' %}"
+            class="btn btn-primary my-2" style="background-color: rgb(37, 201, 37);">カレンダー</a>
           <a href="{% url 'accounts:logout' %}"
-              class="btn btn-secondary my-2">ログアウト</a>
+            class="btn btn-secondary my-2">ログアウト</a>
           
           {% else %}
           <!-- ログイン状態ではない場合のボタン -->

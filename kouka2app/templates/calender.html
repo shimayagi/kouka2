@@ -1,0 +1,30 @@
+<!-- ベーステンプレートを適用する -->
+{% extends 'base.html' %}
+<!--静的ファイルのURLを生成するstaticタグをロードする-->
+{% load static %}
+
+<!-- ヘッダーの情報ページのタイトルは、
+ベーステンプレートを利用するページで設定する -->
+{% block title %}白沢甲部子ども会 Calender{% endblock %}
+
+       
+        <!-- Main Content-->
+        <!-- メインコンテンツを設定する<div>～</div>をテンプレートタグで囲む -->
+        {% block contents %}
+        <div class="calender-container">
+            <iframe src="https://calendar.google.com/calendar/embed?src=fbd87b8beec69cb167b851313a812ed9ffbe05edc249995e884dfcc4dcebe362%40group.calendar.google.com&ctz=Asia%2FTokyo" 
+                style="border: 0; margin-left:5cm" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        </div>
+
+        <style>
+            .calendar-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
+        <!-- メインコンテンツを設定する<div>～</div>をテンプレートタグで囲む -->
+        {% endblock %}
+
+
+
