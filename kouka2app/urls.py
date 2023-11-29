@@ -131,6 +131,16 @@ urlpatterns = [
         name='others_list'
         ),  
 
+    #カレンダーページのURLパターン
+    path(
+        #カレンダーページのURL｢calender｣
+        'calender',
+        #viewsモジュールのCalenderViewを実行
+        views.CalenderView.as_view(),
+        #URLパターンの名前を'calender'にする
+        name='calender'
+        ),  
+
 
 ]
 

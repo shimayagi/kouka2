@@ -333,4 +333,21 @@ class OthersView(ListView):
     # 1ページに表示するレコードの件数
     paginate_by = 2
 
+# カレンダーページのビュー
+class CalenderView(TemplateView):
+    
+    # Attributes:
+    # template_name:レンダリングするテンプレート
+    # googleカレンダーテンプレートをレンダリングする
+    template_name = 'calender.html'
+
+    # クエリを実行する
+    def get_context_data(self,**kwargs):
+        # コンテキストデータを取得する
+        # 親クラスのget_context_dataメソッドを呼び出して元のコンテキストデータを取得する
+        context = super().get_context_data(**kwargs)
+        return context
+
+
+
 
